@@ -1,0 +1,15 @@
+.login-container {
+  margin: 0 auto;
+  margin-top: 20vh;
+  width: 80%;
+}
+.login-container h1 {
+  margin: 0 auto;
+  text-align: center;
+}
+.login-container form {
+  margin: 50px auto;
+}
+.login-container form .ant-form-item {
+  margin-left: -19vh;
+}
