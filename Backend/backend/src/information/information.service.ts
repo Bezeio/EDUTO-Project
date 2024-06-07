@@ -1,13 +1,13 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Information } from './schemas/information.schema';
+import { Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { Information } from "./schemas/information.schema";
 
 @Injectable()
 export class InformationService {
   constructor(
     @InjectModel(Information.name)
-    private informationModel: Model<Information>
+    private informationModel: Model<Information>,
   ) {}
 
   async findAll(): Promise<Information[]> {
@@ -16,5 +16,12 @@ export class InformationService {
 
   async create(information: Information): Promise<Information> {
     return this.informationModel.create(information);
+  }
+
+  async updateById(id: string, information: Information): Promise<Information> {
+    return await this.informationModel.findByIdAndUpdate(id, information, {
+      new: true,
+      runValidators: true,
+    });
   }
 }

@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common'
-import { InformationService } from './information.service'
-import { Information } from './schemas/information.schema'
+import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
+import { InformationService } from "./information.service";
+import { Information } from "./schemas/information.schema";
 
-@Controller('information')
+@Controller("information")
 export class InformationController {
   constructor(private readonly informationService: InformationService) {}
 
@@ -13,8 +13,16 @@ export class InformationController {
 
   @Post()
   async createInformation(
-    @Body() information: Information
+    @Body() information: Information,
   ): Promise<Information> {
     return this.informationService.create(information);
+  }
+
+  @Put(":id")
+  async updateInformation(
+    @Param("id") id: string,
+    @Body() information: Information,
+  ): Promise<Information> {
+    return this.informationService.updateById(id, information);
   }
 }
